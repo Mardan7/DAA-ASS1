@@ -252,7 +252,7 @@ The project includes the required plots:
 ### Time vs. n
 
 ```text
-docs/plots/time_vs_n.png
+plots/time_vs_n.png
 ```
 
 This plot shows how execution time changes as the input size increases.
@@ -260,7 +260,7 @@ This plot shows how execution time changes as the input size increases.
 ### Recursion Depth vs. n
 
 ```text
-docs/plots/recursion_depth_vs_n.png
+plots/recursion_depth_vs_n.png
 ```
 
 This plot shows how maximum recursion depth changes with input size.
@@ -364,13 +364,13 @@ One of the main challenges was implementing the algorithms while measuring recur
 Screenshots of the program output, test results, and plots are stored in:
 
 ```text
-docs/screenshots/
+docs/screenshots/main_output.png
 ```
 
 and
 
 ```text
-docs/plots/
+plots/deptj_vs_n.png
 ```
 
 ---
