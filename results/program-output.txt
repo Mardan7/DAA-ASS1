@@ -1,0 +1,16 @@
+=== Divide-and-Conquer Experiments ===
+Java: 25.0.2; OS: Windows 11 amd64; processors: 12
+Seed: 20260924; warmups per case: 3; measured runs: 7
+n=100    complete: 13 cases, all result checks passed
+n=1000   complete: 13 cases, all result checks passed
+n=5000   complete: 13 cases, all result checks passed
+n=10000  complete: 13 cases, all result checks passed
+n=50000  complete: 13 cases, all result checks passed
+Saved 65 summary rows and 455 raw measurements in results/.
+Saved plots in docs/plots/.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  11.766 s
+[INFO] Finished at: 2026-09-24T15:36:21+05:00
+[INFO] ------------------------------------------------------------------------

@@ -3,11 +3,14 @@ package com.example;
 import java.util.Random;
 
 public class QuickSorter {
-    private static final Random random = new Random();
-    
+    private final Random random;
     public long comparisons = 0;
     public long swaps = 0;
     public int maxDepth = 0;
+
+    public QuickSorter() { this(new Random()); }
+    public QuickSorter(long seed) { this(new Random(seed)); }
+    private QuickSorter(Random random) { this.random = random; }
 
     public void sort(int[] a) {
         comparisons = 0;
@@ -17,46 +20,37 @@ public class QuickSorter {
         quickSortRecursive(a, 0, a.length - 1, 1);
     }
 
-    private void quickSortRecursive(int[] a, int low, int high, int currentDepth) {
+    private void quickSortRecursive(int[] a, int low, int high, int depth) {
+        maxDepth = Math.max(maxDepth, depth);
         while (low < high) {
-            if (currentDepth > maxDepth) maxDepth = currentDepth;
-
-            int pivotIndex = low + random.nextInt(high - low + 1);
-            int pIndex = partition(a, low, high, pivotIndex);
-
-            // Оптимизация хвостовой рекурсии: рекурсия для меньшей части, итерация для большей
-            if (pIndex - low < high - pIndex) {
-                quickSortRecursive(a, low, pIndex - 1, currentDepth + 1);
-                low = pIndex + 1;
+            int pivot = a[low + random.nextInt(high - low + 1)];
+            int lt = low, i = low, gt = high;
+            while (i <= gt) {
+                comparisons++;
+                if (a[i] < pivot) swap(a, lt++, i++);
+                else {
+                    comparisons++;
+                    if (a[i] > pivot) swap(a, i, gt--);
+                    else i++;
+                }
+            }
+            // Recurse only on a nontrivial smaller side; loop over the larger side.
+            if (lt - low < high - gt) {
+                if (lt - low > 1) quickSortRecursive(a, low, lt - 1, depth + 1);
+                low = gt + 1;
             } else {
-                quickSortRecursive(a, pIndex + 1, high, currentDepth + 1);
-                high = pIndex - 1;
+                if (high - gt > 1) quickSortRecursive(a, gt + 1, high, depth + 1);
+                high = lt - 1;
             }
         }
-    }
-
-    private int partition(int[] a, int low, int high, int pivotIndex) {
-        int pivotValue = a[pivotIndex];
-        swap(a, pivotIndex, high);
-        int storeIndex = low;
-
-        for (int i = low; i < high; i++) {
-            comparisons++;
-            if (a[i] < pivotValue) {
-                swap(a, i, storeIndex);
-                storeIndex++;
-            }
-        }
-        swap(a, storeIndex, high);
-        return storeIndex;
     }
 
     private void swap(int[] a, int i, int j) {
         if (i != j) {
             swaps++;
-            int temp = a[i];
+            int value = a[i];
             a[i] = a[j];
-            a[j] = temp;
+            a[j] = value;
         }
     }
 }
